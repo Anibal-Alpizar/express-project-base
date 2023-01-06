@@ -2,22 +2,28 @@ const express = require("express");
 
 const app = express();
 
-app.get("/", (req, res) => {
-  res.send("hello world");
+app.get("/products", (req, res) => {
+  // validate data
+  // query a base de datos
+  // process data
+  res.send("lista de productos");
 });
 
-app.get("/about", (req, res) => {
-  res.send("about");
+app.post("/products", (req, res) => {
+  res.send("creado productos");
 });
 
-app.get("/weather", (req, res) => {
-  res.send("The current weather is nice");
+app.put("/products", (req, res) => {
+  res.send("actualizando producto");
 });
 
-app.use((req, res) => {
-  res.status(404).send("Not found");
+app.delete("/products", (req, res) => {
+  res.send("eliminando un producto");
+});
+
+app.patch("/products", (req, res) => {
+  res.send("actualizando una parte del producto");
 });
 
 app.listen(3000);
-
 console.log(`server on port ${3000}`);
