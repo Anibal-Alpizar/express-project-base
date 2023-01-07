@@ -3,26 +3,18 @@ const morgan = require("morgan");
 
 const app = express();
 
+//settings
+app.set("port", 3000);
+app.set('case sensitive routing', true);
+
+//middlewares
 app.use(express.json());
-app.use(morgan('dev'))
+app.use(morgan("dev"));
 
-app.use("/profile/:user", (req, res) => {
-  res.send(`Hello, ${req.params.user}!`);
+//routes
+app.get("/UserName", (req, res) => {
+  res.send("username route");
 });
 
-
-// middleware 2
-app.use((req, res, next) => {
-  if (req.query.login === "anibal123") {
-    next();
-  } else {
-    res.send("no autorizado");
-  }
-});
-
-app.get("/dashboard", (req, res) => {
-  res.send("dashboard page");
-});
-
-app.listen(3000);
-console.log(`server on port ${3000}`);
+app.listen(app.get("port"));
+console.log(`server ${app.get("appName")} on port ${app.get("port")}`);
