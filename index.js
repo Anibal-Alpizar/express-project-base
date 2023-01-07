@@ -6,40 +6,13 @@ app.use(express.text());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.all("/info", (req, res) => {
-  res.send("server info");
+app.use((req, res, next) => {
+  console.log(`Route: ${req.url}, method: ${req.method}`)
+  next();
 });
 
-app.get("/hello/:user", (req, res) => {
-  console.log(typeof req.params.user);
-  res.send(`hello ${req.params.user.toUpperCase()}`);
-});
-
-app.get("/add/:x/:y", (req, res) => {
-  const { x, y } = req.params;
-  res.send(`Result: ${parseInt(x) + parseInt(y)}`);
-});
-
-app.get("/search/", (req, res) => {
-  console.log(req.query);
-  if (req.query.q === "javascript books") {
-    res.send("lista de libros de javascript");
-  } else {
-    res.send("pagina normal");
-  }
-});
-
-app.get("/users/:username/photo", (req, res) => {
-  if (req.params.username === "anibal") {
-    return res.sendFile("./Javascript.png", {
-      root: __dirname,
-    });
-  }
-  res.send("el usuario no tiene acceso");
-});
-
-app.get("/name/:name/age/:age", (req, res) => {
-  res.send(`El usuario: ${req.params.name}, tiene ${req.params.age} de edad`);
+app.get("/profile", (req, res) => {
+  res.send("profile page");
 });
 
 app.listen(3000);
