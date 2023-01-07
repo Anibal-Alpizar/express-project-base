@@ -16,6 +16,15 @@ app.get("/add/:x/:y", (req, res) => {
   res.send(`Result: ${parseInt(x) + parseInt(y)}`);
 });
 
+app.get("/search/", (req, res) => {
+  console.log(req.query);
+  if (req.query.q === "javascript books") {
+    res.send("lista de libros de javascript");
+  } else {
+    res.send("pagina normal");
+  }
+});
+
 app.get("/users/:username/photo", (req, res) => {
   if (req.params.username === "anibal") {
     return res.sendFile("./Javascript.png", {
@@ -25,9 +34,9 @@ app.get("/users/:username/photo", (req, res) => {
   res.send("el usuario no tiene acceso");
 });
 
-app.get('/name/:name/age/:age', (req,res)=>{
-  res.send(`El usuario: ${req.params.name}, tiene ${req.params.age} de edad`)
-})
+app.get("/name/:name/age/:age", (req, res) => {
+  res.send(`El usuario: ${req.params.name}, tiene ${req.params.age} de edad`);
+});
 
 app.listen(3000);
 console.log(`server on port ${3000}`);
