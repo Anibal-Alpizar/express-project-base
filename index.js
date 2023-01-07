@@ -6,6 +6,10 @@ app.use(express.text());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+app.all("/info", (req, res) => {
+  res.send("server info");
+});
+
 app.get("/hello/:user", (req, res) => {
   console.log(typeof req.params.user);
   res.send(`hello ${req.params.user.toUpperCase()}`);
