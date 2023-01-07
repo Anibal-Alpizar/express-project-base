@@ -1,20 +1,15 @@
 const express = require("express");
+const morgan = require("morgan");
 
 const app = express();
 
-app.use(express.text());
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(morgan('dev'))
 
 app.use("/profile/:user", (req, res) => {
   res.send(`Hello, ${req.params.user}!`);
 });
 
-// middleware 1
-app.use((req, res, next) => {
-  console.log(`Route: ${req.url}, method: ${req.method}`);
-  next();
-});
 
 // middleware 2
 app.use((req, res, next) => {
