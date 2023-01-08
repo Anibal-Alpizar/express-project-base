@@ -14,9 +14,10 @@ app.set("port", 3000);
 app.use(express.json());
 app.use(morgan("dev"));
 
-HomeRoutes(app)
-UserRoutes(app)
+app.use(HomeRoutes);
+app.use(UserRoutes);
 
+//routes
 app.use("/public", express.static(path.join(__dirname, "public")));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
