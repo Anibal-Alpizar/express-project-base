@@ -4,6 +4,9 @@ const path = require("path");
 
 const app = express();
 
+const HomeRoutes = require("./routes/home");
+const UserRoutes = require("./routes/users");
+
 //settings
 app.set("port", 3000);
 
@@ -11,12 +14,8 @@ app.set("port", 3000);
 app.use(express.json());
 app.use(morgan("dev"));
 
-//routes
-app.get("/", (req, res) => {
-  res.send("home");
-});
-
-console.log(__dirname);
+HomeRoutes(app)
+UserRoutes(app)
 
 app.use("/public", express.static(path.join(__dirname, "public")));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
